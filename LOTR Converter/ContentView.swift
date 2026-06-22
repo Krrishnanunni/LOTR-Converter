@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var showExchangeInfo = false
+   
+    @State var r_Amount = ""
+    @State var l_Amount = ""
+    
     var body: some View {
         ZStack{
             Image(.background)
@@ -39,7 +45,8 @@ struct ContentView: View {
                             
                         }
                         
-                        Text("TextField")
+                        TextField("Amount", text: $l_Amount)
+                            .textFieldStyle(.roundedBorder)
                     }
                     Image(systemName: "equal")
                         .font(.largeTitle)
@@ -58,18 +65,34 @@ struct ContentView: View {
                                 .foregroundStyle(.white)
                             
                             
+                            
                         }
                         
-                        Text("TextField")
+                        TextField("Amount", text: $r_Amount)
+                            .textFieldStyle(.roundedBorder)
+                            .multilineTextAlignment(.trailing)
+                            
                     }
                 }
+                .padding()
+                .background(.black.opacity(0.5))
+                .clipShape(.capsule)
+                
                 
                 Spacer()
                 
-                Image(systemName: "info.circle.fill")
-                    .font(.largeTitle)
-                    .foregroundStyle(.white)
-            }.border(.bar)
+                HStack {
+                    Spacer()
+                    Button {
+                        showExchangeInfo.toggle()
+                        print("INfo : \(showExchangeInfo)")
+                    }label: {
+                        Image(systemName: "info.circle.fill")
+                            .font(.largeTitle)
+                            .foregroundStyle(.white)
+                    }.padding(.trailing)
+                }
+            }
             
             
             

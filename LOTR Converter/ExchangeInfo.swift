@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ExchangeInfo: View {
+    
+    @Environment(\.dismiss) var dismissSheet
+    
     var body: some View {
         ZStack {
             
@@ -32,7 +35,7 @@ struct ExchangeInfo: View {
                 
                 
                 Button("Done"){
-                    
+                    dismissSheet()
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(.brown.mix(with: .black, by: 0.2))

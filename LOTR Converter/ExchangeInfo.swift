@@ -25,22 +25,11 @@ struct ExchangeInfo: View {
                     .font(.title3)
                     .padding()
                 
+                ExchangeRateSubView(rightImage: .goldpiece, text:"1 Gold Piece = 4 Gold Pennies", leftImage: .goldpenny)
+                ExchangeRateSubView(rightImage: .goldpenny, text:"1 Gold Penny = 4 Silver Piece", leftImage: .silverpiece)
+                ExchangeRateSubView(rightImage: .silverpiece, text:"1 Silver Piece = 4 Silver Pennies", leftImage: .silverpiece)
+                ExchangeRateSubView(rightImage: .silverpenny, text:"1 Silver Penny = 100 Copper Pennies", leftImage: .copperpenny)
                 
-                
-                HStack{
-                    Image(.goldpiece)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 33)
-                    
-                    Text("1 GoldPiece = 4 GoldPennies")
-                    
-                    
-                    Image(.goldpenny)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 33)
-                }
                 
                 Button("Done"){
                     
@@ -48,12 +37,17 @@ struct ExchangeInfo: View {
                 .buttonStyle(.borderedProminent)
                 .tint(.brown.mix(with: .black, by: 0.2))
                 .font(.largeTitle)
+                .foregroundStyle(.white)
                 .padding()
             }
+            .foregroundStyle(.black)
         }
     }
 }
 
-#Preview {
+#Preview {  
     ExchangeInfo()
 }
+
+
+

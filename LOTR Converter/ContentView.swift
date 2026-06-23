@@ -47,6 +47,7 @@ struct ContentView: View {
                         
                         TextField("Amount", text: $l_Amount)
                             .textFieldStyle(.roundedBorder)
+                            .padding([.bottom,.leading])
                     }
                     Image(systemName: "equal")
                         .font(.largeTitle)
@@ -71,6 +72,7 @@ struct ContentView: View {
                         TextField("Amount", text: $r_Amount)
                             .textFieldStyle(.roundedBorder)
                             .multilineTextAlignment(.trailing)
+                            .padding([.bottom,.trailing])
                             
                     }
                 }

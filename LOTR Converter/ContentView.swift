@@ -10,8 +10,8 @@ import SwiftUI
 struct ContentView: View {
     
     @State var showExchangeInfo = false
-   
     @State var r_Amount = ""
+   
     @State var l_Amount = ""
     
     var body: some View {

@@ -10,9 +10,13 @@ import SwiftUI
 struct ContentView: View {
     
     @State var showExchangeInfo = false
+    @State var showCurrencySelection = false
+    
     @State var r_Amount = ""
-   
     @State var l_Amount = ""
+    
+    @State var leftCurrency:Currency = .copperPenny
+    @State var rightCurrency:Currency = .goldPiece
     
     var body: some View {
         ZStack{
@@ -33,16 +37,19 @@ struct ContentView: View {
                 HStack{
                     VStack{
                         HStack{
-                            Image(.silverpiece)
+                            Image(leftCurrency.image)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 33)
                             
-                            Text("Silver Piece")
+                            Text(leftCurrency.name)
                                 .font(.headline)
                                 .foregroundStyle(.white)
                             
                             
+                        }
+                        .onTapGesture {
+                            showCurrencySelection.toggle()
                         }
                         
                         TextField("Amount", text: $l_Amount)
@@ -56,17 +63,20 @@ struct ContentView: View {
                     
                     VStack{
                         HStack{
-                            Image(.goldpiece)
+                            Image(rightCurrency.image)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 33)
                             
-                            Text("Gold Piece")
+                            Text(rightCurrency.name)
                                 .font(.headline)
                                 .foregroundStyle(.white)
                             
                             
                             
+                        }
+                        .onTapGesture {
+                            showCurrencySelection.toggle()
                         }
                         
                         TextField("Amount", text: $r_Amount)
@@ -101,6 +111,9 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showExchangeInfo) {
             ExchangeInfo()
+        }
+        .sheet(isPresented: $showCurrencySelection) {
+            SelectionView(topCurrency: leftCurrency, bottomCurrency: rightCurrency)
         }
     }
 }

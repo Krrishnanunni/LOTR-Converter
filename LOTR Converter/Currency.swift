@@ -9,8 +9,7 @@ import Foundation
 import SwiftUI
 
 enum Currency: Double,Identifiable,CaseIterable{
-    
-    
+
     case copperPenny = 6400
     case silverPenny = 64
     case silverPiece = 16

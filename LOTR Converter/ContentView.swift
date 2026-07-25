@@ -15,6 +15,9 @@ struct ContentView: View {
     @State var r_Amount = ""
     @State var l_Amount = ""
     
+    @FocusState var isLeftFocused
+    @FocusState var isRightFocused
+    
     @State var leftCurrency:Currency = .copperPenny
     @State var rightCurrency:Currency = .goldPiece
     
@@ -54,7 +57,9 @@ struct ContentView: View {
                         
                         TextField("Amount", text: $l_Amount)
                             .textFieldStyle(.roundedBorder)
+                            .focused($isLeftFocused)
                             .padding([.bottom,.leading])
+                            
                     }
                     Image(systemName: "equal")
                         .font(.largeTitle)
@@ -81,13 +86,16 @@ struct ContentView: View {
                         
                         TextField("Amount", text: $r_Amount)
                             .textFieldStyle(.roundedBorder)
+                            .focused($isRightFocused)
                             .multilineTextAlignment(.trailing)
                             .padding([.bottom,.trailing])
+                            
                             
                     }
                 }
                 .padding()
                 .background(.black.opacity(0.5))
+                .keyboardType(.decimalPad)
                 .clipShape(.capsule)
                 
                 
@@ -109,6 +117,24 @@ struct ContentView: View {
             
             
         }
+        .onChange(of: l_Amount) {
+            if isLeftFocused{
+                r_Amount = leftCurrency.convert(l_Amount, to: rightCurrency)
+            }
+        }
+        .onChange(of: r_Amount) {
+            if isRightFocused{
+                l_Amount = rightCurrency.convert(r_Amount, to: leftCurrency)
+            }
+        }
+        
+        .onChange(of: leftCurrency, {
+            r_Amount = leftCurrency.convert(l_Amount, to: rightCurrency)
+        })
+        .onChange(of: rightCurrency, {
+            l_Amount = rightCurrency.convert(r_Amount, to: leftCurrency)
+        })
+        
         .sheet(isPresented: $showExchangeInfo) {
             ExchangeInfo()
         }
